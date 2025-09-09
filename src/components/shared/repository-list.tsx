@@ -1,3 +1,4 @@
+import { Frown } from "lucide-react";
 import { fetchRepositories } from "@/actions/repository-actions";
 import { RepositoryCard } from "./repository-card";
 
@@ -6,8 +7,9 @@ export async function RepositoryList() {
 
 	if (repositories.length === 0) {
 		return (
-			<div className="text-center py-8">
-				<p className="text-muted-foreground">
+			<div className="text-center py-8 border border-dashed border-border rounded-lg">
+				<p className="text-muted-foreground text-sm">
+					<Frown className="size-5 mx-auto mb-2" />
 					No repositories saved yet.
 				</p>
 			</div>
@@ -22,17 +24,8 @@ export async function RepositoryList() {
 					id={repo.id}
 					branchName={repo.branchName}
 					provider={repo.provider}
-					createdAt={repo.createdAt}
-					// GitLab specific fields
-					groupName={repo.groupName}
-					groupFullName={repo.groupFullName}
-					groupPath={repo.groupPath}
 					projectName={repo.projectName}
 					projectPath={repo.projectPath}
-					projectWebUrl={repo.projectWebUrl}
-					projectDefaultBranch={repo.projectDefaultBranch}
-					branchProtected={repo.branchProtected}
-					branchWebUrl={repo.branchWebUrl}
 				/>
 			))}
 		</div>
