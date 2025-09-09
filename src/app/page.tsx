@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { AddRepository } from "@/components/shared/add-repository";
 import { auth } from "@/lib/auth/server";
 
 export default async function Home() {
@@ -10,9 +11,14 @@ export default async function Home() {
 	if (!session) {
 		redirect("/sign-in");
 	}
+
 	return (
-		<div>
+		<main className="p-5">
 			<h1>Welcome {session.user.name}</h1>
-		</div>
+			<header className="max-w-3xl w-full flex items-center justify-between">
+				<h1>Your Repositories</h1>
+				<AddRepository />
+			</header>
+		</main>
 	);
 }

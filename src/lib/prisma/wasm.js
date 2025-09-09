@@ -166,6 +166,16 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.RepositoryScalarFieldEnum = {
+  id: 'id',
+  groupId: 'groupId',
+  projectId: 'projectId',
+  branchName: 'branchName',
+  provider: 'provider',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -180,13 +190,17 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Provider = exports.$Enums.Provider = {
+  gitlab: 'gitlab',
+  github: 'github'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Repository: 'Repository'
 };
 
 /**
