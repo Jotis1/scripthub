@@ -8,7 +8,10 @@ import type {
 	GitLabGroupProjectsParams,
 	GitLabProject,
 	GitLabProjectBranchesParams,
+	GitLabRawFileParams,
+	GitLabRepositoryFilesParams,
 	GitLabRequestParams,
+	GitLabTreeItem,
 } from "@/types/gitlab";
 
 const GITLAB_API_BASE_URL = `${APP_CONFIG.API.GITLAB_BASE_URL}/api/${APP_CONFIG.API.GITLAB_API_VERSION}`;
