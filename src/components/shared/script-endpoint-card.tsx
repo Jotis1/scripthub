@@ -3,6 +3,7 @@
 import {
 	ExternalLink,
 	FileCode2,
+	Lock,
 	MoreVertical,
 	Power,
 	PowerOff,
@@ -62,7 +63,14 @@ export function ScriptEndpointCard({ endpoint }: ScriptEndpointCardProps) {
 	};
 
 	const handleCopyUrl = () => {
-		const url = `${window.location.origin}${endpoint.servePath}`;
+		let url = `${window.location.origin}${endpoint.servePath}`;
+
+		// If auth is required, show the basic auth format
+		if (endpoint.requiresAuth && endpoint.username) {
+			const host = window.location.host;
+			url = `https://${endpoint.username}:****@${host}${endpoint.servePath}`;
+		}
+
 		navigator.clipboard.writeText(url);
 		// In a real app, you'd show a toast notification
 	};
@@ -95,6 +103,15 @@ export function ScriptEndpointCard({ endpoint }: ScriptEndpointCardProps) {
 						>
 							{endpoint.isActive ? "Active" : "Inactive"}
 						</Badge>
+						{endpoint.requiresAuth && (
+							<Badge
+								variant="outline"
+								className="text-yellow-600 border-yellow-600"
+							>
+								<Lock className="size-3 mr-1" />
+								Protected
+							</Badge>
+						)}
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
 								<Button
@@ -140,21 +157,32 @@ export function ScriptEndpointCard({ endpoint }: ScriptEndpointCardProps) {
 				</div>
 			</CardHeader>
 			<CardContent className="pt-0">
-				<div className="flex items-center justify-between text-sm">
-					<div className="text-muted-foreground">
-						Serves at:{" "}
-						<code className="bg-muted px-1 py-0.5 rounded text-xs">
-							{endpoint.servePath}
-						</code>
+				<div className="space-y-2">
+					<div className="flex items-center justify-between text-sm">
+						<div className="text-muted-foreground">
+							Serves at:{" "}
+							<code className="bg-muted px-1 py-0.5 rounded text-xs">
+								{endpoint.servePath}
+							</code>
+						</div>
+						<Button
+							variant="outline"
+							size="sm"
+							onClick={handleCopyUrl}
+							className="h-7 text-xs"
+						>
+							Copy URL
+						</Button>
 					</div>
-					<Button
-						variant="outline"
-						size="sm"
-						onClick={handleCopyUrl}
-						className="h-7 text-xs"
-					>
-						Copy URL
-					</Button>
+					{endpoint.requiresAuth && endpoint.username && (
+						<div className="text-xs text-muted-foreground flex items-center gap-1">
+							<Lock className="size-3" />
+							Authentication required • Username:{" "}
+							<code className="bg-muted px-1 py-0.5 rounded">
+								{endpoint.username}
+							</code>
+						</div>
+					)}
 				</div>
 			</CardContent>
 		</Card>

@@ -108,6 +108,11 @@ model ScriptEndpoint {
   servePath    String // Custom endpoint path (e.g., "/api/scripts/my-script")
   isActive     Boolean @default(true)
 
+  // Basic Auth fields
+  requiresAuth Boolean @default(false)
+  username     String?
+  passwordHash String?
+
   // Relations
   repository Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
 

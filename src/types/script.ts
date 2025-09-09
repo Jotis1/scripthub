@@ -4,17 +4,26 @@ export interface PowerShellFile {
 	path: string;
 	selected: boolean;
 	customPath?: string;
+	requiresAuth?: boolean;
+	username?: string;
+	password?: string;
 }
 
 export interface ScriptEndpointFormData {
 	filePath: string;
 	servePath: string;
+	requiresAuth?: boolean;
+	username?: string;
+	password?: string;
 }
 
 export interface CreateScriptEndpointParams {
 	repositoryId: string;
 	filePath: string;
 	servePath: string;
+	requiresAuth?: boolean;
+	username?: string;
+	password?: string;
 }
 
 export interface ScriptEndpointWithRepository {
@@ -23,6 +32,9 @@ export interface ScriptEndpointWithRepository {
 	filePath: string;
 	servePath: string;
 	isActive: boolean;
+	requiresAuth: boolean;
+	username?: string | null;
+	passwordHash?: string | null;
 	createdAt: Date;
 	updatedAt: Date;
 	repository: {

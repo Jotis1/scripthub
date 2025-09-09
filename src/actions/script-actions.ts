@@ -1,5 +1,6 @@
 "use server";
 
+import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/db";
 import type {
 	CreateScriptEndpointParams,
@@ -13,6 +14,9 @@ export async function createScriptEndpoint({
 	repositoryId,
 	filePath,
 	servePath,
+	requiresAuth = false,
+	username,
+	password,
 }: CreateScriptEndpointParams) {
 	try {
 		// Ensure servePath starts with /api/scripts/
@@ -26,12 +30,35 @@ export async function createScriptEndpoint({
 			normalizedServePath = `/${normalizedServePath}`;
 		}
 
+		// Validate auth fields if authentication is required
+		if (requiresAuth) {
+			if (!username?.trim()) {
+				throw new Error(
+					"Username is required when authentication is enabled",
+				);
+			}
+			if (!password?.trim()) {
+				throw new Error(
+					"Password is required when authentication is enabled",
+				);
+			}
+		}
+
+		// Hash password if provided
+		let passwordHash: string | undefined;
+		if (requiresAuth && password) {
+			passwordHash = await bcrypt.hash(password, 12);
+		}
+
 		return await prisma.scriptEndpoint.create({
 			data: {
 				repositoryId,
 				filePath,
 				servePath: normalizedServePath,
 				isActive: true,
+				requiresAuth,
+				username: requiresAuth ? username : null,
+				passwordHash: requiresAuth ? passwordHash : null,
 			},
 			include: {
 				repository: {

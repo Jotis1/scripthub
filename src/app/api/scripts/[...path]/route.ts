@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 import { fetchRawFileContent } from "@/actions/gitlab-api";
 import { fetchScriptEndpointByPath } from "@/actions/script-actions";
 import { prisma } from "@/lib/db";
@@ -7,7 +8,48 @@ interface RouteParams {
 	params: Promise<{ path: string[] }>;
 }
 
-export async function GET(_: NextRequest, { params }: RouteParams) {
+/**
+ * Validates basic authentication credentials
+ */
+async function validateBasicAuth(
+	request: NextRequest,
+	endpoint: { username: string | null; passwordHash: string | null },
+): Promise<boolean> {
+	const authorization = request.headers.get("authorization");
+
+	if (!authorization || !authorization.startsWith("Basic ")) {
+		return false;
+	}
+
+	try {
+		const encoded = authorization.slice("Basic ".length);
+		const decoded = Buffer.from(encoded, "base64").toString("utf-8");
+		const [username, password] = decoded.split(":");
+
+		if (
+			!username ||
+			!password ||
+			!endpoint.username ||
+			!endpoint.passwordHash
+		) {
+			return false;
+		}
+
+		// Check username match and password hash
+		const isUsernameValid = username === endpoint.username;
+		const isPasswordValid = await bcrypt.compare(
+			password,
+			endpoint.passwordHash,
+		);
+
+		return isUsernameValid && isPasswordValid;
+	} catch (error) {
+		console.error("Error validating basic auth:", error);
+		return false;
+	}
+}
+
+export async function GET(request: NextRequest, { params }: RouteParams) {
 	try {
 		const { path: pathSegments } = await params;
 		const servePath = `/api/scripts/${pathSegments.join("/")}`;
@@ -22,6 +64,20 @@ export async function GET(_: NextRequest, { params }: RouteParams) {
 				{ error: "Script endpoint not found" },
 				{ status: 404 },
 			);
+		}
+
+		// Check if authentication is required
+		if (endpoint.requiresAuth) {
+			const isAuthenticated = await validateBasicAuth(request, endpoint);
+
+			if (!isAuthenticated) {
+				return new NextResponse("Authentication required", {
+					status: 401,
+					headers: {
+						"WWW-Authenticate": 'Basic realm="Script Access"',
+					},
+				});
+			}
 		}
 
 		// Get access token for the repository provider

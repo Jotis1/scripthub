@@ -8470,6 +8470,9 @@ export namespace Prisma {
 		filePath: string | null;
 		servePath: string | null;
 		isActive: boolean | null;
+		requiresAuth: boolean | null;
+		username: string | null;
+		passwordHash: string | null;
 		createdAt: Date | null;
 		updatedAt: Date | null;
 	};
@@ -8480,6 +8483,9 @@ export namespace Prisma {
 		filePath: string | null;
 		servePath: string | null;
 		isActive: boolean | null;
+		requiresAuth: boolean | null;
+		username: string | null;
+		passwordHash: string | null;
 		createdAt: Date | null;
 		updatedAt: Date | null;
 	};
@@ -8490,6 +8496,9 @@ export namespace Prisma {
 		filePath: number;
 		servePath: number;
 		isActive: number;
+		requiresAuth: number;
+		username: number;
+		passwordHash: number;
 		createdAt: number;
 		updatedAt: number;
 		_all: number;
@@ -8501,6 +8510,9 @@ export namespace Prisma {
 		filePath?: true;
 		servePath?: true;
 		isActive?: true;
+		requiresAuth?: true;
+		username?: true;
+		passwordHash?: true;
 		createdAt?: true;
 		updatedAt?: true;
 	};
@@ -8511,6 +8523,9 @@ export namespace Prisma {
 		filePath?: true;
 		servePath?: true;
 		isActive?: true;
+		requiresAuth?: true;
+		username?: true;
+		passwordHash?: true;
 		createdAt?: true;
 		updatedAt?: true;
 	};
@@ -8521,6 +8536,9 @@ export namespace Prisma {
 		filePath?: true;
 		servePath?: true;
 		isActive?: true;
+		requiresAuth?: true;
+		username?: true;
+		passwordHash?: true;
 		createdAt?: true;
 		updatedAt?: true;
 		_all?: true;
@@ -8613,6 +8631,9 @@ export namespace Prisma {
 		filePath: string;
 		servePath: string;
 		isActive: boolean;
+		requiresAuth: boolean;
+		username: string | null;
+		passwordHash: string | null;
 		createdAt: Date;
 		updatedAt: Date;
 		_count: ScriptEndpointCountAggregateOutputType | null;
@@ -8649,6 +8670,9 @@ export namespace Prisma {
 			filePath?: boolean;
 			servePath?: boolean;
 			isActive?: boolean;
+			requiresAuth?: boolean;
+			username?: boolean;
+			passwordHash?: boolean;
 			createdAt?: boolean;
 			updatedAt?: boolean;
 			repository?: boolean | RepositoryDefaultArgs<ExtArgs>;
@@ -8665,6 +8689,9 @@ export namespace Prisma {
 			filePath?: boolean;
 			servePath?: boolean;
 			isActive?: boolean;
+			requiresAuth?: boolean;
+			username?: boolean;
+			passwordHash?: boolean;
 			createdAt?: boolean;
 			updatedAt?: boolean;
 			repository?: boolean | RepositoryDefaultArgs<ExtArgs>;
@@ -8681,6 +8708,9 @@ export namespace Prisma {
 			filePath?: boolean;
 			servePath?: boolean;
 			isActive?: boolean;
+			requiresAuth?: boolean;
+			username?: boolean;
+			passwordHash?: boolean;
 			createdAt?: boolean;
 			updatedAt?: boolean;
 			repository?: boolean | RepositoryDefaultArgs<ExtArgs>;
@@ -8694,6 +8724,9 @@ export namespace Prisma {
 		filePath?: boolean;
 		servePath?: boolean;
 		isActive?: boolean;
+		requiresAuth?: boolean;
+		username?: boolean;
+		passwordHash?: boolean;
 		createdAt?: boolean;
 		updatedAt?: boolean;
 	};
@@ -8706,6 +8739,9 @@ export namespace Prisma {
 		| "filePath"
 		| "servePath"
 		| "isActive"
+		| "requiresAuth"
+		| "username"
+		| "passwordHash"
 		| "createdAt"
 		| "updatedAt",
 		ExtArgs["result"]["scriptEndpoint"]
@@ -8740,6 +8776,9 @@ export namespace Prisma {
 				filePath: string;
 				servePath: string;
 				isActive: boolean;
+				requiresAuth: boolean;
+				username: string | null;
+				passwordHash: string | null;
 				createdAt: Date;
 				updatedAt: Date;
 			},
@@ -9362,6 +9401,9 @@ export namespace Prisma {
 		readonly filePath: FieldRef<"ScriptEndpoint", "String">;
 		readonly servePath: FieldRef<"ScriptEndpoint", "String">;
 		readonly isActive: FieldRef<"ScriptEndpoint", "Boolean">;
+		readonly requiresAuth: FieldRef<"ScriptEndpoint", "Boolean">;
+		readonly username: FieldRef<"ScriptEndpoint", "String">;
+		readonly passwordHash: FieldRef<"ScriptEndpoint", "String">;
 		readonly createdAt: FieldRef<"ScriptEndpoint", "DateTime">;
 		readonly updatedAt: FieldRef<"ScriptEndpoint", "DateTime">;
 	}
@@ -9936,6 +9978,9 @@ export namespace Prisma {
 		filePath: "filePath";
 		servePath: "servePath";
 		isActive: "isActive";
+		requiresAuth: "requiresAuth";
+		username: "username";
+		passwordHash: "passwordHash";
 		createdAt: "createdAt";
 		updatedAt: "updatedAt";
 	};
@@ -10541,6 +10586,9 @@ export namespace Prisma {
 		filePath?: StringFilter<"ScriptEndpoint"> | string;
 		servePath?: StringFilter<"ScriptEndpoint"> | string;
 		isActive?: BoolFilter<"ScriptEndpoint"> | boolean;
+		requiresAuth?: BoolFilter<"ScriptEndpoint"> | boolean;
+		username?: StringNullableFilter<"ScriptEndpoint"> | string | null;
+		passwordHash?: StringNullableFilter<"ScriptEndpoint"> | string | null;
 		createdAt?: DateTimeFilter<"ScriptEndpoint"> | Date | string;
 		updatedAt?: DateTimeFilter<"ScriptEndpoint"> | Date | string;
 		repository?: XOR<RepositoryScalarRelationFilter, RepositoryWhereInput>;
@@ -10552,6 +10600,9 @@ export namespace Prisma {
 		filePath?: SortOrder;
 		servePath?: SortOrder;
 		isActive?: SortOrder;
+		requiresAuth?: SortOrder;
+		username?: SortOrderInput | SortOrder;
+		passwordHash?: SortOrderInput | SortOrder;
 		createdAt?: SortOrder;
 		updatedAt?: SortOrder;
 		repository?: RepositoryOrderByWithRelationInput;
@@ -10567,6 +10618,12 @@ export namespace Prisma {
 			repositoryId?: StringFilter<"ScriptEndpoint"> | string;
 			filePath?: StringFilter<"ScriptEndpoint"> | string;
 			isActive?: BoolFilter<"ScriptEndpoint"> | boolean;
+			requiresAuth?: BoolFilter<"ScriptEndpoint"> | boolean;
+			username?: StringNullableFilter<"ScriptEndpoint"> | string | null;
+			passwordHash?:
+				| StringNullableFilter<"ScriptEndpoint">
+				| string
+				| null;
 			createdAt?: DateTimeFilter<"ScriptEndpoint"> | Date | string;
 			updatedAt?: DateTimeFilter<"ScriptEndpoint"> | Date | string;
 			repository?: XOR<
@@ -10583,6 +10640,9 @@ export namespace Prisma {
 		filePath?: SortOrder;
 		servePath?: SortOrder;
 		isActive?: SortOrder;
+		requiresAuth?: SortOrder;
+		username?: SortOrderInput | SortOrder;
+		passwordHash?: SortOrderInput | SortOrder;
 		createdAt?: SortOrder;
 		updatedAt?: SortOrder;
 		_count?: ScriptEndpointCountOrderByAggregateInput;
@@ -10603,6 +10663,15 @@ export namespace Prisma {
 		filePath?: StringWithAggregatesFilter<"ScriptEndpoint"> | string;
 		servePath?: StringWithAggregatesFilter<"ScriptEndpoint"> | string;
 		isActive?: BoolWithAggregatesFilter<"ScriptEndpoint"> | boolean;
+		requiresAuth?: BoolWithAggregatesFilter<"ScriptEndpoint"> | boolean;
+		username?:
+			| StringNullableWithAggregatesFilter<"ScriptEndpoint">
+			| string
+			| null;
+		passwordHash?:
+			| StringNullableWithAggregatesFilter<"ScriptEndpoint">
+			| string
+			| null;
 		createdAt?:
 			| DateTimeWithAggregatesFilter<"ScriptEndpoint">
 			| Date
@@ -11115,6 +11184,9 @@ export namespace Prisma {
 		filePath: string;
 		servePath: string;
 		isActive?: boolean;
+		requiresAuth?: boolean;
+		username?: string | null;
+		passwordHash?: string | null;
 		createdAt?: Date | string;
 		updatedAt?: Date | string;
 		repository: RepositoryCreateNestedOneWithoutScriptEndpointsInput;
@@ -11126,6 +11198,9 @@ export namespace Prisma {
 		filePath: string;
 		servePath: string;
 		isActive?: boolean;
+		requiresAuth?: boolean;
+		username?: string | null;
+		passwordHash?: string | null;
 		createdAt?: Date | string;
 		updatedAt?: Date | string;
 	};
@@ -11135,6 +11210,9 @@ export namespace Prisma {
 		filePath?: StringFieldUpdateOperationsInput | string;
 		servePath?: StringFieldUpdateOperationsInput | string;
 		isActive?: BoolFieldUpdateOperationsInput | boolean;
+		requiresAuth?: BoolFieldUpdateOperationsInput | boolean;
+		username?: NullableStringFieldUpdateOperationsInput | string | null;
+		passwordHash?: NullableStringFieldUpdateOperationsInput | string | null;
 		createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 		updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 		repository?: RepositoryUpdateOneRequiredWithoutScriptEndpointsNestedInput;
@@ -11146,6 +11224,9 @@ export namespace Prisma {
 		filePath?: StringFieldUpdateOperationsInput | string;
 		servePath?: StringFieldUpdateOperationsInput | string;
 		isActive?: BoolFieldUpdateOperationsInput | boolean;
+		requiresAuth?: BoolFieldUpdateOperationsInput | boolean;
+		username?: NullableStringFieldUpdateOperationsInput | string | null;
+		passwordHash?: NullableStringFieldUpdateOperationsInput | string | null;
 		createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 		updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 	};
@@ -11156,6 +11237,9 @@ export namespace Prisma {
 		filePath: string;
 		servePath: string;
 		isActive?: boolean;
+		requiresAuth?: boolean;
+		username?: string | null;
+		passwordHash?: string | null;
 		createdAt?: Date | string;
 		updatedAt?: Date | string;
 	};
@@ -11165,6 +11249,9 @@ export namespace Prisma {
 		filePath?: StringFieldUpdateOperationsInput | string;
 		servePath?: StringFieldUpdateOperationsInput | string;
 		isActive?: BoolFieldUpdateOperationsInput | boolean;
+		requiresAuth?: BoolFieldUpdateOperationsInput | boolean;
+		username?: NullableStringFieldUpdateOperationsInput | string | null;
+		passwordHash?: NullableStringFieldUpdateOperationsInput | string | null;
 		createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 		updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 	};
@@ -11175,6 +11262,9 @@ export namespace Prisma {
 		filePath?: StringFieldUpdateOperationsInput | string;
 		servePath?: StringFieldUpdateOperationsInput | string;
 		isActive?: BoolFieldUpdateOperationsInput | boolean;
+		requiresAuth?: BoolFieldUpdateOperationsInput | boolean;
+		username?: NullableStringFieldUpdateOperationsInput | string | null;
+		passwordHash?: NullableStringFieldUpdateOperationsInput | string | null;
 		createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 		updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 	};
@@ -11596,6 +11686,9 @@ export namespace Prisma {
 		filePath?: SortOrder;
 		servePath?: SortOrder;
 		isActive?: SortOrder;
+		requiresAuth?: SortOrder;
+		username?: SortOrder;
+		passwordHash?: SortOrder;
 		createdAt?: SortOrder;
 		updatedAt?: SortOrder;
 	};
@@ -11606,6 +11699,9 @@ export namespace Prisma {
 		filePath?: SortOrder;
 		servePath?: SortOrder;
 		isActive?: SortOrder;
+		requiresAuth?: SortOrder;
+		username?: SortOrder;
+		passwordHash?: SortOrder;
 		createdAt?: SortOrder;
 		updatedAt?: SortOrder;
 	};
@@ -11616,6 +11712,9 @@ export namespace Prisma {
 		filePath?: SortOrder;
 		servePath?: SortOrder;
 		isActive?: SortOrder;
+		requiresAuth?: SortOrder;
+		username?: SortOrder;
+		passwordHash?: SortOrder;
 		createdAt?: SortOrder;
 		updatedAt?: SortOrder;
 	};
@@ -12510,6 +12609,9 @@ export namespace Prisma {
 		filePath: string;
 		servePath: string;
 		isActive?: boolean;
+		requiresAuth?: boolean;
+		username?: string | null;
+		passwordHash?: string | null;
 		createdAt?: Date | string;
 		updatedAt?: Date | string;
 	};
@@ -12519,6 +12621,9 @@ export namespace Prisma {
 		filePath: string;
 		servePath: string;
 		isActive?: boolean;
+		requiresAuth?: boolean;
+		username?: string | null;
+		passwordHash?: string | null;
 		createdAt?: Date | string;
 		updatedAt?: Date | string;
 	};
@@ -12575,6 +12680,9 @@ export namespace Prisma {
 		filePath?: StringFilter<"ScriptEndpoint"> | string;
 		servePath?: StringFilter<"ScriptEndpoint"> | string;
 		isActive?: BoolFilter<"ScriptEndpoint"> | boolean;
+		requiresAuth?: BoolFilter<"ScriptEndpoint"> | boolean;
+		username?: StringNullableFilter<"ScriptEndpoint"> | string | null;
+		passwordHash?: StringNullableFilter<"ScriptEndpoint"> | string | null;
 		createdAt?: DateTimeFilter<"ScriptEndpoint"> | Date | string;
 		updatedAt?: DateTimeFilter<"ScriptEndpoint"> | Date | string;
 	};
@@ -12812,6 +12920,9 @@ export namespace Prisma {
 		filePath: string;
 		servePath: string;
 		isActive?: boolean;
+		requiresAuth?: boolean;
+		username?: string | null;
+		passwordHash?: string | null;
 		createdAt?: Date | string;
 		updatedAt?: Date | string;
 	};
@@ -12821,6 +12932,9 @@ export namespace Prisma {
 		filePath?: StringFieldUpdateOperationsInput | string;
 		servePath?: StringFieldUpdateOperationsInput | string;
 		isActive?: BoolFieldUpdateOperationsInput | boolean;
+		requiresAuth?: BoolFieldUpdateOperationsInput | boolean;
+		username?: NullableStringFieldUpdateOperationsInput | string | null;
+		passwordHash?: NullableStringFieldUpdateOperationsInput | string | null;
 		createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 		updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 	};
@@ -12830,6 +12944,9 @@ export namespace Prisma {
 		filePath?: StringFieldUpdateOperationsInput | string;
 		servePath?: StringFieldUpdateOperationsInput | string;
 		isActive?: BoolFieldUpdateOperationsInput | boolean;
+		requiresAuth?: BoolFieldUpdateOperationsInput | boolean;
+		username?: NullableStringFieldUpdateOperationsInput | string | null;
+		passwordHash?: NullableStringFieldUpdateOperationsInput | string | null;
 		createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 		updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 	};
@@ -12839,6 +12956,9 @@ export namespace Prisma {
 		filePath?: StringFieldUpdateOperationsInput | string;
 		servePath?: StringFieldUpdateOperationsInput | string;
 		isActive?: BoolFieldUpdateOperationsInput | boolean;
+		requiresAuth?: BoolFieldUpdateOperationsInput | boolean;
+		username?: NullableStringFieldUpdateOperationsInput | string | null;
+		passwordHash?: NullableStringFieldUpdateOperationsInput | string | null;
 		createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 		updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
 	};

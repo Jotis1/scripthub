@@ -187,6 +187,9 @@ exports.Prisma.ScriptEndpointScalarFieldEnum = {
 	filePath: "filePath",
 	servePath: "servePath",
 	isActive: "isActive",
+	requiresAuth: "requiresAuth",
+	username: "username",
+	passwordHash: "passwordHash",
 	createdAt: "createdAt",
 	updatedAt: "updatedAt",
 };

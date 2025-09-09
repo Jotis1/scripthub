@@ -1,9 +1,11 @@
 "use client";
 
-import { FileText, Folder, Loader2 } from "lucide-react";
+import { FileText, Folder, Loader2, Lock } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { PasswordInput } from "@/components/ui/password-input";
 import { useErrorHandler } from "@/hooks/use-error-handler";
 import type { GitLabTreeItem } from "@/types/gitlab";
 import type { PowerShellFile } from "@/types/script";
@@ -51,6 +53,9 @@ export function ScriptSelectionForm({
 					path: item.path,
 					selected: false,
 					customPath: `/api/scripts/${item.name.replace(".ps1", "")}`,
+					requiresAuth: false,
+					username: "",
+					password: "",
 				}));
 
 			setFiles(psFiles);
@@ -91,6 +96,37 @@ export function ScriptSelectionForm({
 		);
 	};
 
+	const handleAuthToggle = (fileId: string, requiresAuth: boolean) => {
+		setFiles((prev) =>
+			prev.map((file) =>
+				file.id === fileId
+					? {
+							...file,
+							requiresAuth,
+							username: requiresAuth ? file.username : "",
+							password: requiresAuth ? file.password : "",
+						}
+					: file,
+			),
+		);
+	};
+
+	const handleUsernameChange = (fileId: string, username: string) => {
+		setFiles((prev) =>
+			prev.map((file) =>
+				file.id === fileId ? { ...file, username } : file,
+			),
+		);
+	};
+
+	const handlePasswordChange = (fileId: string, password: string) => {
+		setFiles((prev) =>
+			prev.map((file) =>
+				file.id === fileId ? { ...file, password } : file,
+			),
+		);
+	};
+
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
@@ -98,6 +134,24 @@ export function ScriptSelectionForm({
 		if (selectedFiles.length === 0) {
 			handleError(new Error("Please select at least one file"));
 			return;
+		}
+
+		// Validate auth fields for files requiring authentication
+		for (const file of selectedFiles) {
+			if (file.requiresAuth) {
+				if (!file.username?.trim()) {
+					handleError(
+						new Error(`Username is required for ${file.name}`),
+					);
+					return;
+				}
+				if (!file.password?.trim()) {
+					handleError(
+						new Error(`Password is required for ${file.name}`),
+					);
+					return;
+				}
+			}
 		}
 
 		try {
@@ -111,6 +165,9 @@ export function ScriptSelectionForm({
 						repositoryId,
 						filePath: file.path,
 						servePath: file.customPath,
+						requiresAuth: file.requiresAuth,
+						username: file.requiresAuth ? file.username : undefined,
+						password: file.requiresAuth ? file.password : undefined,
 					}),
 				}),
 			);
@@ -193,32 +250,121 @@ export function ScriptSelectionForm({
 										{file.path}
 									</div>
 									{file.selected && (
-										<div className="space-y-1">
-											<Label
-												htmlFor={`path-${file.id}`}
-												className="text-sm"
-											>
-												Serve Path
-											</Label>
-											<div className="relative">
-												<Input
-													id={`path-${file.id}`}
-													value={file.customPath}
-													onChange={(e) =>
-														handleCustomPathChange(
-															file.id,
-															e.target.value,
-														)
-													}
-													placeholder="/api/scripts/my-script"
-													className="text-sm font-mono"
-												/>
+										<div className="space-y-4">
+											<div className="space-y-1">
+												<Label
+													htmlFor={`path-${file.id}`}
+													className="text-sm"
+												>
+													Serve Path
+												</Label>
+												<div className="relative">
+													<Input
+														id={`path-${file.id}`}
+														value={file.customPath}
+														onChange={(e) =>
+															handleCustomPathChange(
+																file.id,
+																e.target.value,
+															)
+														}
+														placeholder="/api/scripts/my-script"
+														className="text-sm font-mono"
+													/>
+												</div>
+												<p className="text-xs text-muted-foreground">
+													This script will be
+													available at:{" "}
+													{window.location.origin}
+													{file.customPath}
+												</p>
 											</div>
-											<p className="text-xs text-muted-foreground">
-												This script will be available
-												at: {window.location.origin}
-												{file.customPath}
-											</p>
+
+											<div className="space-y-3 border-t pt-3">
+												<div className="flex items-center space-x-2">
+													<Switch
+														id={`auth-${file.id}`}
+														checked={
+															file.requiresAuth
+														}
+														onCheckedChange={(
+															checked,
+														) =>
+															handleAuthToggle(
+																file.id,
+																checked,
+															)
+														}
+													/>
+													<Label
+														htmlFor={`auth-${file.id}`}
+														className="text-sm flex items-center gap-1"
+													>
+														<Lock className="h-3 w-3" />
+														Require Authentication
+													</Label>
+												</div>
+
+												{file.requiresAuth && (
+													<div className="space-y-2 ml-6">
+														<div className="space-y-1">
+															<Label
+																htmlFor={`username-${file.id}`}
+																className="text-xs"
+															>
+																Username
+															</Label>
+															<Input
+																id={`username-${file.id}`}
+																value={
+																	file.username
+																}
+																onChange={(e) =>
+																	handleUsernameChange(
+																		file.id,
+																		e.target
+																			.value,
+																	)
+																}
+																placeholder="Enter username"
+																className="text-sm"
+															/>
+														</div>
+														<div className="space-y-1">
+															<Label
+																htmlFor={`password-${file.id}`}
+																className="text-xs"
+															>
+																Password
+															</Label>
+															<PasswordInput
+																id={`password-${file.id}`}
+																value={
+																	file.password
+																}
+																onChange={(e) =>
+																	handlePasswordChange(
+																		file.id,
+																		e.target
+																			.value,
+																	)
+																}
+																placeholder="Enter password"
+																className="text-sm"
+															/>
+														</div>
+														<p className="text-xs text-muted-foreground">
+															Access with:
+															https://username:password@
+															{
+																window.location
+																	.host
+															}
+															{file.customPath}
+														</p>
+													</div>
+												)}
+											</div>
 										</div>
 									)}
 								</div>
