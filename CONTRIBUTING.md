@@ -1,42 +1,42 @@
-# Guía de Commits Convencionales y buenas prácticas
+# Conventional Commits Guide and Best Practices
 
-## Estructura del mensaje de commit
-
-```text
-<tipo>[ámbito opcional]: <descripción breve en modo imperativo>
-
-[cuerpo opcional]
-
-[nota de pie opcional]
-```
-
-## Prefijos Recomendados
-- **feat**: nueva funcionalidad o característica
-- **fix**: corrección de errores o bugs
-- **docs**: edición exclusiva de documentación
-- **style**: cambios de formato/código sin afectar la lógica
-- **refactor**: mejoras internas sin modificar funcionalidad
-- **test**: cambios o adición de tests
-- **perf**: mejoras de rendimiento
-- **chore**: tareas menores o administrativas
-- **build**: cambios en el sistema de construcción/paquetería
-- **ci**: ajustes a la integración continua
-
-## Ejemplo
+## Commit Message Structure
 
 ```text
-feat(login): añadir verificación de dos pasos
+<type>[optional scope]: <brief description in imperative mood>
 
-Se agrega un sistema de autenticación de doble factor para mejorar la seguridad de inicio de sesión.
+[optional body]
 
-BREAKING CHANGE: El endpoint /login ahora requiere un código adicional.
+[optional footer]
 ```
 
-## Buenas prácticas de redacción
-- El título (línea inicial) debe ser claro, imperativo y conciso (máx. 50 caracteres).
-- Usa el ámbito si el cambio impacta un módulo o área específica.
-- Si es necesario, agrega un cuerpo explicando el razonamiento y contexto.
-- Usa el pie de nota para aclaraciones críticas, como cambios incompatibles (BREAKING CHANGE).
-- Se consistente con la convención elegida para todo el proyecto.
-- Haz commits atómicos y evita mezclar cambios dispares en el mismo commit.
-- No termines el título con punto final.
+## Recommended Prefixes
+- **feat**: new functionality or feature
+- **fix**: bug fixes or error corrections
+- **docs**: documentation changes only
+- **style**: formatting/code changes that don't affect logic
+- **refactor**: internal improvements without changing functionality
+- **test**: adding or modifying tests
+- **perf**: performance improvements
+- **chore**: minor or administrative tasks
+- **build**: changes to build system/packaging
+- **ci**: continuous integration adjustments
+
+## Example
+
+```text
+feat(login): add two-factor authentication
+
+Add a two-factor authentication system to improve login security.
+
+BREAKING CHANGE: The /login endpoint now requires an additional code.
+```
+
+## Writing Best Practices
+- The title (initial line) should be clear, imperative, and concise (max 50 characters).
+- Use scope if the change impacts a specific module or area.
+- Add a body explaining reasoning and context if necessary.
+- Use footer for critical clarifications like breaking changes (BREAKING CHANGE).
+- Be consistent with the chosen convention throughout the project.
+- Make atomic commits and avoid mixing disparate changes in the same commit.
+- Don't end the title with a period.

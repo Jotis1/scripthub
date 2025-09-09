@@ -41,3 +41,23 @@ export interface GitLabProjectBranchesParams extends GitLabRequestParams {
 export interface GitLabGroupParams extends GitLabRequestParams {
 	groupId: number;
 }
+
+export interface GitLabRepositoryFilesParams extends GitLabRequestParams {
+	projectId: number;
+	branchName?: string;
+	path?: string;
+}
+
+export interface GitLabRawFileParams extends GitLabRequestParams {
+	projectId: number;
+	filePath: string;
+	branchName?: string;
+}
+
+export interface GitLabTreeItem {
+	id: string;
+	name: string;
+	type: "tree" | "blob";
+	path: string;
+	mode: string;
+}

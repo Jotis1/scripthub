@@ -74,26 +74,46 @@ enum Provider {
 }
 
 model Repository {
-  id                  String    @id @default(cuid())
-  groupId             String
-  projectId           String
-  branchName          String
-  provider            Provider
-  
+  id         String   @id @default(cuid())
+  groupId    String
+  projectId  String
+  branchName String
+  provider   Provider
+
   // GitLab specific fields
-  groupName           String
-  groupFullName       String
-  groupPath           String
-  projectName         String
-  projectPath         String
-  projectWebUrl       String
+  groupName            String
+  groupFullName        String
+  groupPath            String
+  projectName          String
+  projectPath          String
+  projectWebUrl        String
   projectDefaultBranch String
-  branchProtected     Boolean   @default(false)
-  branchWebUrl        String
-  
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @default(now()) @updatedAt
+  branchProtected      Boolean @default(false)
+  branchWebUrl         String
+
+  // Relations
+  scriptEndpoints ScriptEndpoint[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@unique([groupId, projectId, branchName, provider])
   @@map("repository")
+}
+
+model ScriptEndpoint {
+  id           String  @id @default(cuid())
+  repositoryId String
+  filePath     String // Path to .ps1 file in repository
+  servePath    String // Custom endpoint path (e.g., "/api/scripts/my-script")
+  isActive     Boolean @default(true)
+
+  // Relations
+  repository Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([servePath])
+  @@map("script_endpoint")
 }
