@@ -1,9 +1,7 @@
 "use client";
 
 import { FileText, Folder, Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useCallback, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useErrorHandler } from "@/hooks/use-error-handler";
@@ -23,15 +21,9 @@ export function ScriptSelectionForm({
 }: ScriptSelectionFormProps) {
 	const [files, setFiles] = useState<PowerShellFile[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [isSubmitting, setIsSubmitting] = useState(false);
-	const router = useRouter();
 	const { error, handleError, clearError } = useErrorHandler();
 
-	useEffect(() => {
-		fetchPowerShellFiles();
-	}, [repositoryId]);
-
-	const fetchPowerShellFiles = async () => {
+	const fetchPowerShellFiles = useCallback(async () => {
 		try {
 			setIsLoading(true);
 			clearError();
@@ -67,7 +59,11 @@ export function ScriptSelectionForm({
 		} finally {
 			setIsLoading(false);
 		}
-	};
+	}, [repositoryId, clearError, handleError]);
+
+	useEffect(() => {
+		fetchPowerShellFiles();
+	}, [fetchPowerShellFiles]);
 
 	const handleFileToggle = (fileId: string) => {
 		setFiles((prev) =>
@@ -105,7 +101,6 @@ export function ScriptSelectionForm({
 		}
 
 		try {
-			setIsSubmitting(true);
 			clearError();
 
 			const createPromises = selectedFiles.map((file) =>
@@ -133,8 +128,6 @@ export function ScriptSelectionForm({
 			onSuccess?.();
 		} catch (err) {
 			handleError(err);
-		} finally {
-			setIsSubmitting(false);
 		}
 	};
 
