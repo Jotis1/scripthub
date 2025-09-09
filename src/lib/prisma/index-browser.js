@@ -172,6 +172,15 @@ exports.Prisma.RepositoryScalarFieldEnum = {
   projectId: 'projectId',
   branchName: 'branchName',
   provider: 'provider',
+  groupName: 'groupName',
+  groupFullName: 'groupFullName',
+  groupPath: 'groupPath',
+  projectName: 'projectName',
+  projectPath: 'projectPath',
+  projectWebUrl: 'projectWebUrl',
+  projectDefaultBranch: 'projectDefaultBranch',
+  branchProtected: 'branchProtected',
+  branchWebUrl: 'branchWebUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

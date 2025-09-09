@@ -74,13 +74,25 @@ enum Provider {
 }
 
 model Repository {
-  id         String    @id @default(cuid())
-  groupId    String
-  projectId  String
-  branchName String
-  provider   Provider
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @default(now()) @updatedAt
+  id                  String    @id @default(cuid())
+  groupId             String
+  projectId           String
+  branchName          String
+  provider            Provider
+  
+  // GitLab specific fields
+  groupName           String
+  groupFullName       String
+  groupPath           String
+  projectName         String
+  projectPath         String
+  projectWebUrl       String
+  projectDefaultBranch String
+  branchProtected     Boolean   @default(false)
+  branchWebUrl        String
+  
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @default(now()) @updatedAt
 
   @@unique([groupId, projectId, branchName, provider])
   @@map("repository")

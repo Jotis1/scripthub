@@ -5683,6 +5683,15 @@ export namespace Prisma {
     projectId: string | null
     branchName: string | null
     provider: $Enums.Provider | null
+    groupName: string | null
+    groupFullName: string | null
+    groupPath: string | null
+    projectName: string | null
+    projectPath: string | null
+    projectWebUrl: string | null
+    projectDefaultBranch: string | null
+    branchProtected: boolean | null
+    branchWebUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5693,6 +5702,15 @@ export namespace Prisma {
     projectId: string | null
     branchName: string | null
     provider: $Enums.Provider | null
+    groupName: string | null
+    groupFullName: string | null
+    groupPath: string | null
+    projectName: string | null
+    projectPath: string | null
+    projectWebUrl: string | null
+    projectDefaultBranch: string | null
+    branchProtected: boolean | null
+    branchWebUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5703,6 +5721,15 @@ export namespace Prisma {
     projectId: number
     branchName: number
     provider: number
+    groupName: number
+    groupFullName: number
+    groupPath: number
+    projectName: number
+    projectPath: number
+    projectWebUrl: number
+    projectDefaultBranch: number
+    branchProtected: number
+    branchWebUrl: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5715,6 +5742,15 @@ export namespace Prisma {
     projectId?: true
     branchName?: true
     provider?: true
+    groupName?: true
+    groupFullName?: true
+    groupPath?: true
+    projectName?: true
+    projectPath?: true
+    projectWebUrl?: true
+    projectDefaultBranch?: true
+    branchProtected?: true
+    branchWebUrl?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5725,6 +5761,15 @@ export namespace Prisma {
     projectId?: true
     branchName?: true
     provider?: true
+    groupName?: true
+    groupFullName?: true
+    groupPath?: true
+    projectName?: true
+    projectPath?: true
+    projectWebUrl?: true
+    projectDefaultBranch?: true
+    branchProtected?: true
+    branchWebUrl?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5735,6 +5780,15 @@ export namespace Prisma {
     projectId?: true
     branchName?: true
     provider?: true
+    groupName?: true
+    groupFullName?: true
+    groupPath?: true
+    projectName?: true
+    projectPath?: true
+    projectWebUrl?: true
+    projectDefaultBranch?: true
+    branchProtected?: true
+    branchWebUrl?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5818,6 +5872,15 @@ export namespace Prisma {
     projectId: string
     branchName: string
     provider: $Enums.Provider
+    groupName: string
+    groupFullName: string
+    groupPath: string
+    projectName: string
+    projectPath: string
+    projectWebUrl: string
+    projectDefaultBranch: string
+    branchProtected: boolean
+    branchWebUrl: string
     createdAt: Date
     updatedAt: Date
     _count: RepositoryCountAggregateOutputType | null
@@ -5845,6 +5908,15 @@ export namespace Prisma {
     projectId?: boolean
     branchName?: boolean
     provider?: boolean
+    groupName?: boolean
+    groupFullName?: boolean
+    groupPath?: boolean
+    projectName?: boolean
+    projectPath?: boolean
+    projectWebUrl?: boolean
+    projectDefaultBranch?: boolean
+    branchProtected?: boolean
+    branchWebUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["repository"]>
@@ -5855,6 +5927,15 @@ export namespace Prisma {
     projectId?: boolean
     branchName?: boolean
     provider?: boolean
+    groupName?: boolean
+    groupFullName?: boolean
+    groupPath?: boolean
+    projectName?: boolean
+    projectPath?: boolean
+    projectWebUrl?: boolean
+    projectDefaultBranch?: boolean
+    branchProtected?: boolean
+    branchWebUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["repository"]>
@@ -5865,6 +5946,15 @@ export namespace Prisma {
     projectId?: boolean
     branchName?: boolean
     provider?: boolean
+    groupName?: boolean
+    groupFullName?: boolean
+    groupPath?: boolean
+    projectName?: boolean
+    projectPath?: boolean
+    projectWebUrl?: boolean
+    projectDefaultBranch?: boolean
+    branchProtected?: boolean
+    branchWebUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["repository"]>
@@ -5875,11 +5965,20 @@ export namespace Prisma {
     projectId?: boolean
     branchName?: boolean
     provider?: boolean
+    groupName?: boolean
+    groupFullName?: boolean
+    groupPath?: boolean
+    projectName?: boolean
+    projectPath?: boolean
+    projectWebUrl?: boolean
+    projectDefaultBranch?: boolean
+    branchProtected?: boolean
+    branchWebUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type RepositoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "groupId" | "projectId" | "branchName" | "provider" | "createdAt" | "updatedAt", ExtArgs["result"]["repository"]>
+  export type RepositoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "groupId" | "projectId" | "branchName" | "provider" | "groupName" | "groupFullName" | "groupPath" | "projectName" | "projectPath" | "projectWebUrl" | "projectDefaultBranch" | "branchProtected" | "branchWebUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["repository"]>
 
   export type $RepositoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Repository"
@@ -5890,6 +5989,15 @@ export namespace Prisma {
       projectId: string
       branchName: string
       provider: $Enums.Provider
+      groupName: string
+      groupFullName: string
+      groupPath: string
+      projectName: string
+      projectPath: string
+      projectWebUrl: string
+      projectDefaultBranch: string
+      branchProtected: boolean
+      branchWebUrl: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["repository"]>
@@ -6320,6 +6428,15 @@ export namespace Prisma {
     readonly projectId: FieldRef<"Repository", 'String'>
     readonly branchName: FieldRef<"Repository", 'String'>
     readonly provider: FieldRef<"Repository", 'Provider'>
+    readonly groupName: FieldRef<"Repository", 'String'>
+    readonly groupFullName: FieldRef<"Repository", 'String'>
+    readonly groupPath: FieldRef<"Repository", 'String'>
+    readonly projectName: FieldRef<"Repository", 'String'>
+    readonly projectPath: FieldRef<"Repository", 'String'>
+    readonly projectWebUrl: FieldRef<"Repository", 'String'>
+    readonly projectDefaultBranch: FieldRef<"Repository", 'String'>
+    readonly branchProtected: FieldRef<"Repository", 'Boolean'>
+    readonly branchWebUrl: FieldRef<"Repository", 'String'>
     readonly createdAt: FieldRef<"Repository", 'DateTime'>
     readonly updatedAt: FieldRef<"Repository", 'DateTime'>
   }
@@ -6766,6 +6883,15 @@ export namespace Prisma {
     projectId: 'projectId',
     branchName: 'branchName',
     provider: 'provider',
+    groupName: 'groupName',
+    groupFullName: 'groupFullName',
+    groupPath: 'groupPath',
+    projectName: 'projectName',
+    projectPath: 'projectPath',
+    projectWebUrl: 'projectWebUrl',
+    projectDefaultBranch: 'projectDefaultBranch',
+    branchProtected: 'branchProtected',
+    branchWebUrl: 'branchWebUrl',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -7167,6 +7293,15 @@ export namespace Prisma {
     projectId?: StringFilter<"Repository"> | string
     branchName?: StringFilter<"Repository"> | string
     provider?: EnumProviderFilter<"Repository"> | $Enums.Provider
+    groupName?: StringFilter<"Repository"> | string
+    groupFullName?: StringFilter<"Repository"> | string
+    groupPath?: StringFilter<"Repository"> | string
+    projectName?: StringFilter<"Repository"> | string
+    projectPath?: StringFilter<"Repository"> | string
+    projectWebUrl?: StringFilter<"Repository"> | string
+    projectDefaultBranch?: StringFilter<"Repository"> | string
+    branchProtected?: BoolFilter<"Repository"> | boolean
+    branchWebUrl?: StringFilter<"Repository"> | string
     createdAt?: DateTimeFilter<"Repository"> | Date | string
     updatedAt?: DateTimeFilter<"Repository"> | Date | string
   }
@@ -7177,6 +7312,15 @@ export namespace Prisma {
     projectId?: SortOrder
     branchName?: SortOrder
     provider?: SortOrder
+    groupName?: SortOrder
+    groupFullName?: SortOrder
+    groupPath?: SortOrder
+    projectName?: SortOrder
+    projectPath?: SortOrder
+    projectWebUrl?: SortOrder
+    projectDefaultBranch?: SortOrder
+    branchProtected?: SortOrder
+    branchWebUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7191,6 +7335,15 @@ export namespace Prisma {
     projectId?: StringFilter<"Repository"> | string
     branchName?: StringFilter<"Repository"> | string
     provider?: EnumProviderFilter<"Repository"> | $Enums.Provider
+    groupName?: StringFilter<"Repository"> | string
+    groupFullName?: StringFilter<"Repository"> | string
+    groupPath?: StringFilter<"Repository"> | string
+    projectName?: StringFilter<"Repository"> | string
+    projectPath?: StringFilter<"Repository"> | string
+    projectWebUrl?: StringFilter<"Repository"> | string
+    projectDefaultBranch?: StringFilter<"Repository"> | string
+    branchProtected?: BoolFilter<"Repository"> | boolean
+    branchWebUrl?: StringFilter<"Repository"> | string
     createdAt?: DateTimeFilter<"Repository"> | Date | string
     updatedAt?: DateTimeFilter<"Repository"> | Date | string
   }, "id" | "groupId_projectId_branchName_provider">
@@ -7201,6 +7354,15 @@ export namespace Prisma {
     projectId?: SortOrder
     branchName?: SortOrder
     provider?: SortOrder
+    groupName?: SortOrder
+    groupFullName?: SortOrder
+    groupPath?: SortOrder
+    projectName?: SortOrder
+    projectPath?: SortOrder
+    projectWebUrl?: SortOrder
+    projectDefaultBranch?: SortOrder
+    branchProtected?: SortOrder
+    branchWebUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: RepositoryCountOrderByAggregateInput
@@ -7217,6 +7379,15 @@ export namespace Prisma {
     projectId?: StringWithAggregatesFilter<"Repository"> | string
     branchName?: StringWithAggregatesFilter<"Repository"> | string
     provider?: EnumProviderWithAggregatesFilter<"Repository"> | $Enums.Provider
+    groupName?: StringWithAggregatesFilter<"Repository"> | string
+    groupFullName?: StringWithAggregatesFilter<"Repository"> | string
+    groupPath?: StringWithAggregatesFilter<"Repository"> | string
+    projectName?: StringWithAggregatesFilter<"Repository"> | string
+    projectPath?: StringWithAggregatesFilter<"Repository"> | string
+    projectWebUrl?: StringWithAggregatesFilter<"Repository"> | string
+    projectDefaultBranch?: StringWithAggregatesFilter<"Repository"> | string
+    branchProtected?: BoolWithAggregatesFilter<"Repository"> | boolean
+    branchWebUrl?: StringWithAggregatesFilter<"Repository"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Repository"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Repository"> | Date | string
   }
@@ -7555,6 +7726,15 @@ export namespace Prisma {
     projectId: string
     branchName: string
     provider: $Enums.Provider
+    groupName: string
+    groupFullName: string
+    groupPath: string
+    projectName: string
+    projectPath: string
+    projectWebUrl: string
+    projectDefaultBranch: string
+    branchProtected?: boolean
+    branchWebUrl: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7565,6 +7745,15 @@ export namespace Prisma {
     projectId: string
     branchName: string
     provider: $Enums.Provider
+    groupName: string
+    groupFullName: string
+    groupPath: string
+    projectName: string
+    projectPath: string
+    projectWebUrl: string
+    projectDefaultBranch: string
+    branchProtected?: boolean
+    branchWebUrl: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7575,6 +7764,15 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     branchName?: StringFieldUpdateOperationsInput | string
     provider?: EnumProviderFieldUpdateOperationsInput | $Enums.Provider
+    groupName?: StringFieldUpdateOperationsInput | string
+    groupFullName?: StringFieldUpdateOperationsInput | string
+    groupPath?: StringFieldUpdateOperationsInput | string
+    projectName?: StringFieldUpdateOperationsInput | string
+    projectPath?: StringFieldUpdateOperationsInput | string
+    projectWebUrl?: StringFieldUpdateOperationsInput | string
+    projectDefaultBranch?: StringFieldUpdateOperationsInput | string
+    branchProtected?: BoolFieldUpdateOperationsInput | boolean
+    branchWebUrl?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7585,6 +7783,15 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     branchName?: StringFieldUpdateOperationsInput | string
     provider?: EnumProviderFieldUpdateOperationsInput | $Enums.Provider
+    groupName?: StringFieldUpdateOperationsInput | string
+    groupFullName?: StringFieldUpdateOperationsInput | string
+    groupPath?: StringFieldUpdateOperationsInput | string
+    projectName?: StringFieldUpdateOperationsInput | string
+    projectPath?: StringFieldUpdateOperationsInput | string
+    projectWebUrl?: StringFieldUpdateOperationsInput | string
+    projectDefaultBranch?: StringFieldUpdateOperationsInput | string
+    branchProtected?: BoolFieldUpdateOperationsInput | boolean
+    branchWebUrl?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7595,6 +7802,15 @@ export namespace Prisma {
     projectId: string
     branchName: string
     provider: $Enums.Provider
+    groupName: string
+    groupFullName: string
+    groupPath: string
+    projectName: string
+    projectPath: string
+    projectWebUrl: string
+    projectDefaultBranch: string
+    branchProtected?: boolean
+    branchWebUrl: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7605,6 +7821,15 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     branchName?: StringFieldUpdateOperationsInput | string
     provider?: EnumProviderFieldUpdateOperationsInput | $Enums.Provider
+    groupName?: StringFieldUpdateOperationsInput | string
+    groupFullName?: StringFieldUpdateOperationsInput | string
+    groupPath?: StringFieldUpdateOperationsInput | string
+    projectName?: StringFieldUpdateOperationsInput | string
+    projectPath?: StringFieldUpdateOperationsInput | string
+    projectWebUrl?: StringFieldUpdateOperationsInput | string
+    projectDefaultBranch?: StringFieldUpdateOperationsInput | string
+    branchProtected?: BoolFieldUpdateOperationsInput | boolean
+    branchWebUrl?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7615,6 +7840,15 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     branchName?: StringFieldUpdateOperationsInput | string
     provider?: EnumProviderFieldUpdateOperationsInput | $Enums.Provider
+    groupName?: StringFieldUpdateOperationsInput | string
+    groupFullName?: StringFieldUpdateOperationsInput | string
+    groupPath?: StringFieldUpdateOperationsInput | string
+    projectName?: StringFieldUpdateOperationsInput | string
+    projectPath?: StringFieldUpdateOperationsInput | string
+    projectWebUrl?: StringFieldUpdateOperationsInput | string
+    projectDefaultBranch?: StringFieldUpdateOperationsInput | string
+    branchProtected?: BoolFieldUpdateOperationsInput | boolean
+    branchWebUrl?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7936,6 +8170,15 @@ export namespace Prisma {
     projectId?: SortOrder
     branchName?: SortOrder
     provider?: SortOrder
+    groupName?: SortOrder
+    groupFullName?: SortOrder
+    groupPath?: SortOrder
+    projectName?: SortOrder
+    projectPath?: SortOrder
+    projectWebUrl?: SortOrder
+    projectDefaultBranch?: SortOrder
+    branchProtected?: SortOrder
+    branchWebUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7946,6 +8189,15 @@ export namespace Prisma {
     projectId?: SortOrder
     branchName?: SortOrder
     provider?: SortOrder
+    groupName?: SortOrder
+    groupFullName?: SortOrder
+    groupPath?: SortOrder
+    projectName?: SortOrder
+    projectPath?: SortOrder
+    projectWebUrl?: SortOrder
+    projectDefaultBranch?: SortOrder
+    branchProtected?: SortOrder
+    branchWebUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7956,6 +8208,15 @@ export namespace Prisma {
     projectId?: SortOrder
     branchName?: SortOrder
     provider?: SortOrder
+    groupName?: SortOrder
+    groupFullName?: SortOrder
+    groupPath?: SortOrder
+    projectName?: SortOrder
+    projectPath?: SortOrder
+    projectWebUrl?: SortOrder
+    projectDefaultBranch?: SortOrder
+    branchProtected?: SortOrder
+    branchWebUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }

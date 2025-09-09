@@ -79,8 +79,20 @@ model Repository {
   projectId  String
   branchName String
   provider   Provider
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+
+  // GitLab specific fields
+  groupName            String
+  groupFullName        String
+  groupPath            String
+  projectName          String
+  projectPath          String
+  projectWebUrl        String
+  projectDefaultBranch String
+  branchProtected      Boolean @default(false)
+  branchWebUrl         String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@unique([groupId, projectId, branchName, provider])
   @@map("repository")
